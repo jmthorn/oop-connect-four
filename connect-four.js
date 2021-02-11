@@ -1,0 +1,19 @@
+//Changing the color => 
+//Have currentPlayer variable. Set it to either red or black using an 
+//IF conditional changing the color based on whose turn it is => show this 
+//by changing the class to either red or black
+
+//Indicating a column is full => 
+//Approach 1: Use placing new token approach - check to see if column vairable === 0 . 
+//      If zero, will add .full class to that column.
+//Approach 2: See if all of the square IDs have innerHTML or div Children.
+//      If the have either, add .full class.
+
+//Placing a new token: 2 approaches => 
+//Approach 1: Setting column count variables each with a value of 6
+//      attaching each to column ID and when player picks column, 
+//      decrement column count by 1.
+//Approach 2: Check to see if the highest  square ID has any innerHTML
+//      or div child -- if it does, go to next lower available. 
+
+
