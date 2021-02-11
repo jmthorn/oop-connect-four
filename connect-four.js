@@ -16,4 +16,41 @@
 //Approach 2: Check to see if the highest  square ID has any innerHTML
 //      or div child -- if it does, go to next lower available. 
 
+import Game from "./game.js"
 
+let game = undefined;
+
+function updateUI() {
+
+    if (game === undefined) {
+        let boardHolder = document.getElementById("board-holder");
+        boardHolder.classList.add('is-invisible');
+        let gameName = document.getElementById("game-name");
+        gameName.innerHTML = getName();
+    }
+}
+
+window.addEventListener('DOMContentLoaded', event => {
+let playerForm = document.getElementById("form-holder");
+let player1 = document.getElementById("player-1-name");
+let player2 = document.getElementById("player-2-name");
+let newGame = document.getElementById("new-game");
+
+        playerForm.addEventListener("keyup", event => {
+            
+           
+            if (player1.value && player2.value) {
+            newGame.disabled = false;
+            }    
+        })
+
+      playerForm.addEventListener("submit", event => {
+        event.preventDefault();
+        game = new Game(player1.value, player2.value);
+        player1.value = '';
+        player2.value = '';
+        newGame.disabled = true;
+        updatedUI();
+      })  
+
+})
