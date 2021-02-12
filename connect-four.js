@@ -28,13 +28,24 @@ function updateUI() {
         let gameName = document.getElementById("game-name");
         gameName.innerHTML = getName();
     }
+    if (game.currentPlayer === 1) { 
+        clickTargets.classList.add("red");
+    } else { 
+        clickTargets.classList.add("black");
+    }
 }
 
 window.addEventListener('DOMContentLoaded', event => {
-let playerForm = document.getElementById("form-holder");
-let player1 = document.getElementById("player-1-name");
-let player2 = document.getElementById("player-2-name");
-let newGame = document.getElementById("new-game");
+    let playerForm = document.getElementById("form-holder");
+    let player1 = document.getElementById("player-1-name");
+    let player2 = document.getElementById("player-2-name");
+    let newGame = document.getElementById("new-game");
+    let clickTargets = document.getElementById("click-targets");
+
+        clickTargets.addEventListener("click", event => { 
+            game.playInColumn();
+            updateUI();
+        })
 
         playerForm.addEventListener("keyup", event => {
             
@@ -44,13 +55,15 @@ let newGame = document.getElementById("new-game");
             }    
         })
 
-      playerForm.addEventListener("submit", event => {
-        event.preventDefault();
-        game = new Game(player1.value, player2.value);
-        player1.value = '';
-        player2.value = '';
-        newGame.disabled = true;
-        updatedUI();
+        playerForm.addEventListener("submit", event => {
+            event.preventDefault();
+            game = new Game(player1.value, player2.value);
+            player1.value = '';
+            player2.value = '';
+            newGame.disabled = true;
+            updateUI();
       })  
 
 })
+
+
