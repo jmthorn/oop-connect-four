@@ -13,6 +13,12 @@ class Column {
             return null;
         }
     }
+
+    isFull() {
+        if (this.spaces.length === 6) {
+            return true;
+        }
+    }
 }
 
 
