@@ -38,7 +38,13 @@ window.addEventListener('DOMContentLoaded', event => {
     let clickTargets = document.getElementById("click-targets");
 
     clickTargets.addEventListener("click", (event) => {
-      game.playInColumn();
+       let colId = event.target.id;
+
+       if (colId.includes("column-")) {
+       let colNum = colId.split("-")[1];
+       let num = Number.parseInt(colNum); 
+       game.playInColumn(num);
+       }
       updateUI();
     });
         playerForm.addEventListener("keyup", event => {
