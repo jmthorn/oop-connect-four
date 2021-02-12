@@ -14,8 +14,22 @@
 //Approach 2: Check to see if the highest  square ID has any innerHTML
 //      or div child -- if it does, go to next lower available. 
 import Game from "./game.js"
+
+
 let game = undefined;
 function updateUI() {
+    for(let row = 0; row <= 5; row++) { 
+
+        for(let col = 0; col <= 6; col++) { 
+            let currentSquare = document.getElementById(`square-${row}-${col}`);
+            currentSquare.innerHTML = ""
+            if (game.getTokenAt(currentSquare) === 1) { 
+                let div =document.createElement("div");
+                div.setAttribute(".token", ".black");
+
+            }
+        }
+    }
     if (game === undefined) {
         let boardHolder = document.getElementById("board-holder");
         boardHolder.classList.add('is-invisible');
