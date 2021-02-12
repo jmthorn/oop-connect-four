@@ -22,11 +22,15 @@ function updateUI() {
 
         for(let col = 0; col <= 6; col++) { 
             let currentSquare = document.getElementById(`square-${row}-${col}`);
-            currentSquare.innerHTML = ""
+            currentSquare.innerHTML = "";
             if (game.getTokenAt(currentSquare) === 1) { 
-                let div =document.createElement("div");
-                div.setAttribute(".token", ".black");
-
+                let div = document.createElement("div");
+                div.classList.add("token black");
+                currentSquare.appendChild(div);
+            } else { 
+                let div = document.createElement("div");
+                div.classList.add("token red");
+                currentSquare.appendChild(div);
             }
         }
     }
