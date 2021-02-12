@@ -7,6 +7,7 @@ class Game {
     this.currentPlayer = 1;
     this.columns = [];
     this.addColumns();
+    this.winnerNumber = 0;
   }
   getName() {
     return `${this.name1} vs. ${this.name2}`;
@@ -21,6 +22,7 @@ class Game {
       this.currentPlayer = 1;
     }
     console.log(selectedColumn)
+    checkForTie();
   }
   addColumns() {
     for (let i = 0; i < 7; i++) {
@@ -33,6 +35,14 @@ class Game {
   }
   isColumnFull(index) {
     return this.columns[index].isFull();
+  }
+  checkForTie() {
+    for (let i = 0; i < this.columns.length; i++ ) {
+      if (!this.columns[i].isFull()) {
+        return false;
+      }
+    }
+    return this.winnerNumber = 3;
   }
 }
 

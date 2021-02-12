@@ -50,11 +50,12 @@ function updateUI() {
     }
 
     for(let i = 0; i <= 6; i++) { 
-        let columnIndex = document.getElementById(`column-${i}`);
-        if (game.isColumnFull(columnIndex)) { 
-            columnIndex.classList.add("full");
-        } else if (!game.isColumnFull(columnIndex)) { 
-            columnIndex.classList.remove("full");
+        let column = document.getElementById(`column-${i}`);
+     
+        if (game.isColumnFull(i)) { 
+            column.classList.add("full");
+        } else if (!game.isColumnFull(i)) { 
+            column.classList.remove("full");
         }
     }
 }
