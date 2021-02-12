@@ -14,27 +14,26 @@
 //Approach 2: Check to see if the highest  square ID has any innerHTML
 //      or div child -- if it does, go to next lower available. 
 import Game from "./game.js"
-
+import Column from "./column.js"
 
 let game = undefined;
-function updateUI() {
 
-    
+function updateUI() {
 
     for(let row = 0; row <= 5; row++) { 
 
         for(let col = 0; col <= 6; col++) { 
             let currentSquare = document.getElementById(`square-${row}-${col}`);
             currentSquare.innerHTML = "";
-            if (game.getTokenAt(currentSquare) === 1) { 
+            if (game.getTokenAt(row, col) === 1) { 
                 let div = document.createElement("div");
-                div.classList.add("token black");
+                div.classList.add("token","black");
                 currentSquare.appendChild(div);
-            } else { 
+            } else if (game.getTokenAt(row, col) === 2){ 
                 let div = document.createElement("div");
-                div.classList.add("token red");
+                div.classList.add("token", "red");
                 currentSquare.appendChild(div);
-            }
+            } 
         }
     }
     if (game === undefined) {
@@ -43,10 +42,20 @@ function updateUI() {
         let gameName = document.getElementById("game-name");
         gameName.innerHTML = getName();
     }
+    let clickTargets = document.getElementById("click-targets");
     if (game.currentPlayer === 1) { 
         clickTargets.classList.add("red");
     } else { 
         clickTargets.classList.add("black");
+    }
+
+    for(let i = 0; i <= 6; i++) { 
+        let columnIndex = document.getElementById(`column-${i}`);
+        if (game.isColumnFull(columnIndex)) { 
+            columnIndex.classList.add("full");
+        } else if (!game.isColumnFull(columnIndex)) { 
+            columnIndex.classList.remove("full");
+        }
     }
 }
 
@@ -57,7 +66,24 @@ window.addEventListener('DOMContentLoaded', event => {
     let player2 = document.getElementById("player-2-name");
     let newGame = document.getElementById("new-game");
     let clickTargets = document.getElementById("click-targets");
+    let button = document.getElementById("new-game");
 
+    playerForm.addEventListener("keyup", event => {
+        
+        if (player1.value && player2.value) {
+        newGame.disabled = false;
+        }    
+    })
+    button.addEventListener("click", event => {
+
+      game = new Game(player1.value, player2.value);
+      console.log(game)
+      player1.value = '';
+      player2.value = '';
+      newGame.disabled = true;
+      updateUI();
+      
+    })  
     clickTargets.addEventListener("click", (event) => {
        let colId = event.target.id;
 
@@ -65,25 +91,10 @@ window.addEventListener('DOMContentLoaded', event => {
        let colNum = colId.split("-")[1];
        let num = Number.parseInt(colNum); 
        game.playInColumn(num);
+       updateUI();
        }
-      updateUI();
     });
-        playerForm.addEventListener("keyup", event => {
-            
-           
-            if (player1.value && player2.value) {
-            newGame.disabled = false;
-            }    
-        })
 
-      playerForm.addEventListener("submit", event => {
-        event.preventDefault();
-        game = new Game(player1.value, player2.value);
-        player1.value = '';
-        player2.value = '';
-        newGame.disabled = true;
-        updateUI();
-      })  
 
 })
 

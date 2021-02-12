@@ -6,9 +6,8 @@ class Game {
     this.name2 = playerTwoName;
     this.currentPlayer = 1;
     this.columns = [];
-    addColumns();
+    this.addColumns();
   }
-
   getName() {
     return `${this.name1} vs. ${this.name2}`;
   }
@@ -17,13 +16,14 @@ class Game {
     selectedColumn.add(this.currentPlayer)
 
     if (this.currentPlayer === 1) {
-      this.currentPlayer === 2;
+      this.currentPlayer = 2;
     } else {
-      this.currentPlayer === 1;
+      this.currentPlayer = 1;
     }
+    console.log(selectedColumn)
   }
   addColumns() {
-    for (i = 0; i < 7; i++) {
+    for (let i = 0; i < 7; i++) {
       this.columns.push(new Column);
     }
   }
@@ -31,9 +31,8 @@ class Game {
     let selectedColumn = this.columns[col];
     return selectedColumn.getTokenAt(row);
   }
-
   isColumnFull(index) {
-    return game.isFull(this.columns[index]);
+    return this.columns[index].isFull();
   }
 }
 
